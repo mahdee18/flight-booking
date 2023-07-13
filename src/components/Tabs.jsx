@@ -1,8 +1,8 @@
 import { useState } from "react";
-import OneWayForm from "./OneWayForm";
 import RoundTripForm from "./RoundTripForm";
 import MultiCityForm from "./MultiCityForm";
 import { MdFlight } from "react-icons/md";
+import OneWayForm from "./OneWayForm";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState(0);
