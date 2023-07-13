@@ -12,7 +12,7 @@ const Tabs = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-6xl">
         <div className="flex mb-4">
           <button
             className={`${
