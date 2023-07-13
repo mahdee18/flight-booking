@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import OneWayForm from './OneWayForm';
-import RoundTripForm from './RoundTripForm';
-import MultiCityForm from './MultiCityForm';
+import { useState } from "react";
+import OneWayForm from "./OneWayForm";
+import RoundTripForm from "./RoundTripForm";
+import MultiCityForm from "./MultiCityForm";
+import { MdFlight } from "react-icons/md";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -11,29 +12,33 @@ const Tabs = () => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-white w-3/4 mx-auto p-6 rounded-lg shadow-2xl">
       <div className="w-full max-w-6xl">
+        <div className="mb-8 flex items-center gap-1">
+          <MdFlight className="w-8 h-8 text-[#27922e]" />
+          <span className="font-semibold text-base">Flights</span>
+        </div>
         <div className="flex mb-4">
           <button
             className={`${
-              activeTab === 0 ? 'bg-blue-500' : 'bg-gray-200'
-            } text-white px-4 py-2 mr-1 rounded-l`}
+              activeTab === 0 ? "bg-[#e7fddc] text-[#27922e]" : "bg-gray-200"
+            }  px-4 py-2 mr-1 rounded-full`}
             onClick={() => handleTabClick(0)}
           >
             One-way
           </button>
           <button
             className={`${
-              activeTab === 1 ? 'bg-blue-500' : 'bg-gray-200'
-            } text-white px-4 py-2 mx-1`}
+              activeTab === 1 ? "bg-[#e7fddc] text-[#27922e]" : "bg-gray-200"
+            }  px-4 py-2 mr-1 rounded-full`}
             onClick={() => handleTabClick(1)}
           >
             Round-trip
           </button>
           <button
             className={`${
-              activeTab === 2 ? 'bg-blue-500' : 'bg-gray-200'
-            } text-white px-4 py-2 ml-1 rounded-r`}
+              activeTab === 2 ? "bg-[#e7fddc] text-[#27922e]" : "bg-gray-200"
+            }  px-4 py-2 mr-1 rounded-full`}
             onClick={() => handleTabClick(2)}
           >
             Multi-city

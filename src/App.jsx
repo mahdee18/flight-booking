@@ -5,10 +5,10 @@ import Tabs from './components/Tabs'
 function App() {
 
   return (
-    <>
-    {/* <FlightsSection></FlightsSection> */}
+    <div className='my-20 mx-20'>
+
     <Tabs></Tabs>
-    </>
+    </div>
   )
 }
 
