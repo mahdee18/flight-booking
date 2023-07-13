@@ -12,7 +12,7 @@ This project implements a flight booking feature that allows users to search for
 
  ## Deployment
 
-The project is deployed and can be accessed [here](https://example.com](https://flight-ticket-121.netlify.app/)).
+The project is deployed and can be accessed [here]https://flight-ticket-121.netlify.app/.
 
 ## Installation
 
