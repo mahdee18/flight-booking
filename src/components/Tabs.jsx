@@ -46,9 +46,11 @@ const Tabs = () => {
             Multi-city
           </button>
         </div>
-        {activeTab === 0 && <OneWayForm />}
-        {activeTab === 1 && <RoundTripForm />}
-        {activeTab === 2 && <MultiCityForm />}
+        <div className="flex flex-col space-y-4">
+          {activeTab === 0 && <OneWayForm />}
+          {activeTab === 1 && <RoundTripForm />}
+          {activeTab === 2 && <MultiCityForm />}
+        </div>
       </div>
     </div>
   );

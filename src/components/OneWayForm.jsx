@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaExchangeAlt } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 import cities from "../../public/airport_autosuggetion.json";
 import AllDropdowns from "./AllDropdowns";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const OneWayForm = () => {
   const [from, setFrom] = useState("");
@@ -54,8 +56,12 @@ const OneWayForm = () => {
     );
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
+
   return (
-    <form className="px-8 pt-2 pb-2">
+    <form className="px-8 pt-2 pb-2" data-aos="fade-up" data-aos-duration="500">
       <div className="flex flex-col md:flex-row mb-4 mx-auto w-11/12">
         <div className="md:w-1/2 pr-2 mb-2 md:mb-0">
           <div className="flex relative">
@@ -92,9 +98,7 @@ const OneWayForm = () => {
                   >
                     <span className="flex items-center gap-2">
                       <MdLocationOn
-                        className="w-6 h-6
-                      
-                      text-[#27922e]"
+                        className="w-6 h-6 text-[#27922e]"
                       ></MdLocationOn>
                       {city.city_name}, {city.country_name}
                     </span>

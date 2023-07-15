@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PaymentType = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +25,10 @@ const PaymentType = () => {
   ];
 
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -68,6 +74,8 @@ const PaymentType = () => {
           type="button"
           className="inline-flex items-center justify-center w-full rounded-md px-4 py-2 bg-white text-md font-medium text-gray-500 hover:bg-gray-200 focus:outline-none"
           onClick={handleToggle}
+          data-aos="fade-right"
+          data-aos-duration="300"
         >
           {selectedCheckboxes.length > 0
             ? `${selectedCheckboxes.length} Payment Types `
@@ -76,7 +84,11 @@ const PaymentType = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute -top-3 right-0 mt-2 md:w-[25rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-5">
+        <div
+          className="origin-top-right absolute -top-3 right-0 mt-2 md:w-[25rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-5"
+          data-aos="fade-right"
+          data-aos-duration="300"
+        >
           <div
             className="py-1"
             role="menu"
@@ -128,7 +140,7 @@ const PaymentType = () => {
           )}
           <span className="text-xs text-[#767676]">
             Tips: To Find Popular Payment Types, You Can Change Your
-            &#34;Country&#34; Setting (Located On Top-Right Menu).
+            "Country" Setting (Located On Top-Right Menu).
           </span>
           <hr className="my-4" />
           <button

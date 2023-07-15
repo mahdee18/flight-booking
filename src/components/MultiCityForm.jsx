@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaExchangeAlt } from "react-icons/fa";
@@ -6,12 +6,21 @@ import { MdLocationOn } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import cities from "../../public/airport_autosuggetion.json";
 import AllDropdowns from "./AllDropdowns";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const MultiCityForm = () => {
   const [formFields, setFormFields] = useState({
     0: { from: "", to: "", departure: null },
     1: { from: "", to: "", departure: null },
   });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
 
   const handleFromChange = (e, index) => {
     setFormFields((prevState) => ({
@@ -90,12 +99,14 @@ const MultiCityForm = () => {
       ...prevState,
       [lastIndex + 1]: { from: "", to: "", departure: null },
     }));
+    AOS.refresh();
   };
 
   const handleRemoveField = (index) => {
     const updatedFields = { ...formFields };
     delete updatedFields[index];
     setFormFields(updatedFields);
+    AOS.refresh();
   };
 
   const CustomHeader = ({ date, decreaseMonth, increaseMonth, index }) => {
@@ -114,7 +125,7 @@ const MultiCityForm = () => {
 
   return (
     <>
-      <div className="flex justify-end mb-2 relative">
+      <div className="flex justify-end mb-2 relative" data-aos="fade-up">
         <button
           className="absolute bottom-[10px] text-[#27922e] border border-[#27922e] hover:bg-[#e7fddc] font-bold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
           type="button"
@@ -126,8 +137,8 @@ const MultiCityForm = () => {
       {Object.keys(formFields).map((index) => {
         const field = formFields[index];
         return (
-          <div className="-mb-5" key={index}>
-            <form className="px-8 pt-2 pb-2">
+          <div className="-mb-5" key={index} data-aos="fade-up">
+            <form className="px-8">
               <div className="flex flex-col md:flex-row mb-4 mx-auto w-11/12">
                 <div className="md:w-1/2 pr-2 mb-2 md:mb-0">
                   <div className="relative flex">
@@ -251,7 +262,10 @@ const MultiCityForm = () => {
           </div>
         );
       })}
-      <div className="flex flex-col md:flex-row items-center justify-end gap-16">
+      <div
+        className="flex flex-col md:flex-row items-center justify-end gap-16"
+        data-aos="fade-up"
+      >
         <AllDropdowns />
       </div>
     </>

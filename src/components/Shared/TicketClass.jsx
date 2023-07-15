@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const TicketClass = () => {
   const [selectedOption, setSelectedOption] = useState("Economy");
@@ -12,6 +14,10 @@ const TicketClass = () => {
     "Business Class",
     "First Class",
   ];
+
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -37,7 +43,12 @@ const TicketClass = () => {
   };
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div
+      className="relative inline-block text-left"
+      ref={dropdownRef}
+      data-aos="fade-right"
+      data-aos-duration="300"
+    >
       <div>
         <button
           type="button"
@@ -49,7 +60,11 @@ const TicketClass = () => {
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute -top-3 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div
+          className="origin-top-right absolute -top-3 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          data-aos="fade-right"
+          data-aos-duration="300"
+        >
           <div
             className="py-1 text-md"
             role="menu"

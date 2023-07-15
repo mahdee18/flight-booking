@@ -3,6 +3,8 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { VscPerson } from "react-icons/vsc";
 import { PiPerson } from "react-icons/pi";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PersonType = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +34,10 @@ const PersonType = () => {
   ]);
 
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -80,21 +86,29 @@ const PersonType = () => {
   };
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div
+      className="relative inline-block text-left"
+      ref={dropdownRef}
+      data-aos="fade-right"
+      data-aos-duration="300"
+    >
       <div>
         <button
           type="button"
           className="inline-flex items-center justify-center w-full rounded-md px-4 py-2 bg-white text-md font-medium text-gray-500 hover:bg-gray-200 focus:outline-none"
           onClick={handleToggle}
         >
-          {selectedOption.count}<span className="ml-1">{selectedOption.text}</span>
-          <BiSolidDownArrow className="w-4 h-3 text-black" />
+          {selectedOption.count}
+          <span className="ml-1">{selectedOption.text}</span>
+          <BiSolidDownArrow className="w-4 h-3 ml-2 text-black" />
         </button>
       </div>
       {isOpen && (
         <div
           className="origin-top-right absolute -top-3 right-0 mt-2 w-[230px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-4 px-1"
           onClick={handleToggle}
+          data-aos="fade-right"
+          data-aos-duration="300"
         >
           <div
             className="py-1"
