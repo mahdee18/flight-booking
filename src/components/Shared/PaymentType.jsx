@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BiSolidDownArrow } from 'react-icons/bi';
+import { useState, useEffect, useRef } from "react";
+import { BiSolidDownArrow } from "react-icons/bi";
 
 const PaymentType = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,65 +7,102 @@ const PaymentType = () => {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
   const options = [
-    'MasterCard Credit',
-    'Visa Credit',
-    'American Express',
-    'Bank Transfer',
-    'Diners Club',
-    'MasterCard Cirrus',
-    'MasterCard Debit',
-    'PayPal',
-    'Visa Debit',
-    'Cash Payment',
-    'Western Union',
-    'Bitcoin',
-    'Easypaisa',
+    "MasterCard Credit",
+    "Visa Credit",
+    "American Express",
+    "Bank Transfer",
+    "Diners Club",
+    "MasterCard Cirrus",
+    "MasterCard Debit",
+    "PayPal",
+    "Visa Debit",
+    "Cash Payment",
+    "Western Union",
+    "Bitcoin",
+    "Easypaisa",
   ];
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleShowAll = () => {
+  const handleShowAll = (event) => {
+    event.stopPropagation();
     setShowAll(!showAll);
   };
 
   const handleCheckboxChange = (option) => {
     if (selectedCheckboxes.includes(option)) {
-      setSelectedCheckboxes(selectedCheckboxes.filter((item) => item !== option));
+      setSelectedCheckboxes(
+        selectedCheckboxes.filter((item) => item !== option)
+      );
     } else {
       setSelectedCheckboxes([...selectedCheckboxes, option]);
     }
   };
 
+  const handleApply = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left" ref={dropdownRef}>
       <div>
         <button
           type="button"
-          className="inline-flex items-center gap-2 justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          className="inline-flex items-center justify-center w-full rounded-md px-4 py-2 bg-white text-md font-medium text-gray-500 hover:bg-gray-200 focus:outline-none"
           onClick={handleToggle}
         >
-          {selectedCheckboxes.length > 0 ? `${selectedCheckboxes.length} Payment Types ` : 'Payment Types'} <BiSolidDownArrow></BiSolidDownArrow>
+          {selectedCheckboxes.length > 0
+            ? `${selectedCheckboxes.length} Payment Types `
+            : "Payment Types"}{" "}
+          <BiSolidDownArrow className="w-4 h-3 text-black"></BiSolidDownArrow>
         </button>
       </div>
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-56 sm:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-[400px]">
+        <div className="origin-top-right absolute -top-3 right-0 mt-2 md:w-[25rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-5">
+          <div
+            className="py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
+            <span className="text-xs text-[#767676]">
+              By Selecting One Or More (Max 10) Payment Types, Prices On Wego
+              Will Include Applicable Minimum Payment Fee. Please Note That Not
+              All Providers Support All Payment Types.
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 mt-4">
               {options.slice(0, showAll ? options.length : 6).map((option) => (
                 <div
                   key={option}
-                  className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+                  className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 text-[#1d1d1d]"
                   role="menuitem"
                   onClick={() => handleCheckboxChange(option)}
                 >
                   <input
                     type="checkbox"
-                    className="mr-2 form-checkbox w-4 h-4 sm:w-5 sm:h-5 bg-green-500 text-green-600"
+                    className="chk mr-2 w-4 h-4 sm:w-5 sm:h-5 rounded form-checkbox"
                     checked={selectedCheckboxes.includes(option)}
                     onChange={() => {}}
                   />
+
                   {option}
                 </div>
               ))}
@@ -74,22 +111,33 @@ const PaymentType = () => {
           {!showAll && (
             <button
               type="button"
-              className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none"
+              className="w-full py-2 text-sm text-[#47b610] font-semibold flex justify-start"
               onClick={handleShowAll}
             >
-              Show All
+              + Show More
             </button>
           )}
           {showAll && (
             <button
               type="button"
-              className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none"
+              className="w-full py-2 text-sm text-[#47b610] font-semibold flex justify-start"
               onClick={handleShowAll}
             >
-              See Less
+              - Show Less
             </button>
           )}
-          
+          <span className="text-xs text-[#767676]">
+            Tips: To Find Popular Payment Types, You Can Change Your
+            &#34;Country&#34; Setting (Located On Top-Right Menu).
+          </span>
+          <hr className="my-4" />
+          <button
+            type="button"
+            onClick={handleApply}
+            className="text-[#47b610] font-semibold flex ms-auto"
+          >
+            Apply
+          </button>
         </div>
       )}
     </div>
