@@ -56,8 +56,8 @@ const OneWayForm = () => {
 
   return (
     <form className="px-8 pt-2 pb-2">
-      <div className="flex mb-4 mx-auto w-11/12">
-        <div className="w-1/3 pr-2">
+      <div className="flex flex-col md:flex-row mb-4 mx-auto w-11/12">
+        <div className="md:w-1/2 pr-2 mb-2 md:mb-0">
           <div className="flex relative">
             <input
               className="relative text-sm placeholder-transparent transition-all outline-none peer disabled:cursor-not-allowed shadow appearance-none border rounded w-full py-3.5 px-3 text-gray-700 text-[18px] leading-tight focus:outline-none focus:shadow-outline font-semibold"
@@ -104,7 +104,7 @@ const OneWayForm = () => {
             </ul>
           )}
         </div>
-        <div className="w-1/3 pr-2">
+        <div className="md:w-1/2 pr-2">
           <div className="relative flex">
             <input
               className="relative text-sm placeholder-transparent transition-all outline-none peer disabled:cursor-not-allowed shadow appearance-none border rounded w-full py-3.5 px-3 text-gray-700 text-[18px] leading-tight focus:outline-none focus:shadow-outline font-semibold"
@@ -140,7 +140,7 @@ const OneWayForm = () => {
             </ul>
           )}
         </div>
-        <div className="w-1/3">
+        <div className="md:w-1/2 pr-2 mt-2 md:mt-0">
           <DatePicker
             id="departure"
             selected={departure}
@@ -159,7 +159,7 @@ const OneWayForm = () => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-center justify-end gap-16">
         <AllDropdowns></AllDropdowns>
       </div>
     </form>
